@@ -1,3 +1,23 @@
+var cityButtonsEl = document.querySelector("#search-btn");
+var cityInputEl = document.querySelector("#city-name");
+var formInputEl = document.querySelector("#search-box");
+
+var formSubmitHandler = function(event) {
+  event.preventDefault();
+  var cityName = cityInputEl.value.trim();
+
+  if (cityName) {
+    // getUserRepos(username);
+    // nameInputEl.value="";
+    console.log(cityName);
+  } else {
+    alert("Please enter a Github username");
+  }
+  console.log("hello", event);
+};
+
+formInputEl.addEventListener("submit", formSubmitHandler);
+
 var convertCity = function(city) {
   var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=9c2bde727734176187ec259dc26ddab0";
   fetch(apiURL)
