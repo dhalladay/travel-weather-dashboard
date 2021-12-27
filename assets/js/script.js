@@ -16,7 +16,7 @@ var formSubmitHandler = function(event) {
   console.log("hello", event);
 };
 
-formInputEl.addEventListener("submit", formSubmitHandler);
+// formInputEl.addEventListener("submit", formSubmitHandler);
 
 var convertCity = function(city) {
   var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=9c2bde727734176187ec259dc26ddab0";

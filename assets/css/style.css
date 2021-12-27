@@ -1,3 +1,20 @@
 input:focus::placeholder {
   color: transparent;
 }
+
+header {
+  height: 50%;
+}
+
+header h1{
+  color:azure;
+}
+
+.container-fluid{
+  padding-right: 15px;
+  padding-left: 15px;
+  }
+
+.right-col {
+  height: 600px;
+}

@@ -4,36 +4,42 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style.css" />
   <title>Weather Dashboard</title>
 </head>
 <body>
-  <header class="header">
+  <header class="header bg-dark text-center">
     <h1>Weather Dashboard</h1>
   </header>
   <main>
-    <div id="search-col" class="left-col">
-      <div id="search-entry">
-        <form id="search-box">
-          <h3 class="label">Search for a City:</h3>
-          <label id="form-label" for="city-name">City</label>
-          <input name=" city-name" id="city-name" type="text" placeholder="City Name"/>
-          <button type="submit" id="search-btn">Search</button>
-        </form>
+    <div class="row mx-3">
+      <div id="search-col" class="left-col col-md-3 pl-0 border-bottom mh-100">
+        <div id="search-entry" class="row m-0 text-center w-100">
+          <form id="search-box" class="container-fluid col-12">
+            <label id="form-label" for="city-name" class="row w-100 m-2">Search for a City:</label>
+            <input name=" city-name" id="city-name" type="text" placeholder="City Name" class="row w-100 m-2"/>
+            <button type="submit" id="search-btn" class="row btn btn-primary w-100 m-2">Search</button>
+          </form>
+        </div>
+        <div id="search-history" class="">
+  
+        </div>
       </div>
-      <div id="search-history">
-
-      </div>
-    </div>
-    <div id="info" class="right-col">
-      <div id="current">
-
-      </div>
-      <div id="forecast">
-
+      <div class="vr"></div>
+      <div id="info" class="right-col col-md-9 border mh-100">
+        <div id="current">
+  
+        </div>
+        <div id="forecast">
+  
+        </div>
       </div>
     </div>
   </main>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="assets/js/script.js"></script>
 </body>
 </html>
