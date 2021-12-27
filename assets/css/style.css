@@ -3,7 +3,7 @@ input:focus::placeholder {
 }
 
 header {
-  height: 50%;
+  background-image: linear-gradient(to right, navy , blue);
 }
 
 header h1{
@@ -14,7 +14,3 @@ header h1{
   padding-right: 15px;
   padding-left: 15px;
   }
-
-.right-col {
-  height: 600px;
-}
