@@ -46,6 +46,7 @@ var oneCall = function(city, locArr) {
         currentData = data.current;
         forecastData = data.daily;
         displayCurrentWeather(city, currentData);
+        displayForecast(forecastData);
       })
     } else {
       alert("Unable to find weather data, please try again.");
@@ -55,7 +56,6 @@ var oneCall = function(city, locArr) {
 };
 
 var displayCurrentWeather = function(city, currentData) {
-  console.log(currentData)
   var date = new Date(currentData.dt * 1000);
   var month = date.getMonth() + 1;
   var day = date.getDate(); 
@@ -83,3 +83,25 @@ var displayCurrentWeather = function(city, currentData) {
     <p>UV Index: <button class="btn ${uvIndex}">${currentData.uvi}</button></p>
   `;
 }
+
+var displayForecast = function(forecastData) {
+  for (var i = 0; i < 5; i++) {
+    var date = new Date(forecastData[i].dt * 1000);
+    var month = date.getMonth() + 1;
+    var day = date.getDate(); 
+    var year = date.getFullYear();
+    $('<div />', {
+      'id': i,
+      'class': 'card col-md-2 mt-1',
+      'html': `
+      <div class="card-body">
+        <h5 class="card-title">(${month}/${day}/${year})</h5>
+        <img src="http://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}@2x.png" alt="icon representing ${forecastData[i].weather[0].main}" class="weatherIconSmall">
+        <p class="card-text">Temp: ${forecastData[i].temp.day}° F </p>
+        <p class="card-text">Wind: ${forecastData[i].wind_speed} MPH</p>
+        <p class="card-text">Humidity: ${forecastData[i].humidity}</p>
+      </div>
+      `,
+   }).appendTo('#forecast')
+  };
+};
