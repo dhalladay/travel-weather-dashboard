@@ -2,6 +2,11 @@ input:focus::placeholder {
   color: transparent;
 }
 
+body, main {
+  margin: 0;
+  padding: 0;
+}
+
 header {
   background-image: linear-gradient(to right, navy , blue);
 }
@@ -10,7 +15,31 @@ header h1{
   color:azure;
 }
 
-.container-fluid{
-  padding-right: 15px;
-  padding-left: 15px;
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.row {
+  margin: 0;
+}
+
+.border-bottom {
+  border-width: 3px !important;
+}
+
+#history-search-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#info {
+  padding-right: 0;
+}
+
+@media screen and (max-width: 640px) {
+  #info {
+    margin-top: 15px;
   }
+}

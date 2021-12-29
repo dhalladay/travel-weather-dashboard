@@ -38,14 +38,14 @@ var convertCity = function(city) {
 var oneCall = function(city, locArr) {
   var lat = locArr[0];
   var lon = locArr[1];
-  var apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=9c2bde727734176187ec259dc26ddab0`;
+  var apiURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=9c2bde727734176187ec259dc26ddab0&units=imperial`;
   fetch(apiURL)
   .then(function(response) {
     if(response.ok) {
       response.json().then(function(data) {
         currentData = data.current;
         forecastData = data.daily;
-        console.log(data, data.current, data.daily);
+        displayCurrentWeather(city, currentData);
       })
     } else {
       alert("Unable to find weather data, please try again.");
@@ -54,6 +54,27 @@ var oneCall = function(city, locArr) {
   .catch("Unable to connect to Open Weather Map. Please try again later.")
 };
 
-var displayCurrentWeather = function(currentData) {
-  var currentH2 = document.createElement("h2")
+var displayCurrentWeather = function(city, currentData) {
+  console.log(currentData)
+  var getDate = new Date(currentData.dt);
+  var uvIndex = '';
+  var getUvIndex = function(uvi) {
+    if (uvi < 3) {
+      return uvIndex = 'btn-success';
+    } else if (uvi >= 3 && currentData.uvi <= 5) {
+      return uvIndex = "btn-warning";
+    } else if (uvi > 5) {
+      return uvIndex = "btn-danger";
+    }
+  };
+
+  getUvIndex(currentData.uvi);
+
+  currentInputEL.innerHTML = `
+    <h3>${city} (${getDate})</h3>
+    <p>Temp: ${currentData.temp}° F</p>
+    <p>Wind: ${currentData.wind_speed} MPH</p>
+    <p>Humidity: ${currentData.humidity}%</p>
+    <p>UV Index: <button class="btn ${uvIndex}">${currentData.uvi}</button></p>
+  `;
 }
