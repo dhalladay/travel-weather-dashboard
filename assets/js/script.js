@@ -8,11 +8,13 @@ var loadHistory = function() {
     return searchHistory = [];
   }
 
-}
+};
 
 var formSubmitHandler = function(event) {
   event.preventDefault();
-  var city = cityInputEl.value.trim();
+  var city = $('#city-name')
+    .val()
+    .trim()
 
   if (city) {
     convertCity(city);
@@ -20,7 +22,8 @@ var formSubmitHandler = function(event) {
   } else {
     alert("Please enter a City");
   }
-  cityInputEl.value = '';
+
+  $('#city-name').val('');
 };
 
 $('#search-btn').on("click", formSubmitHandler);
@@ -99,7 +102,7 @@ var displayForecast = function(forecastData) {
   //add 5-day forecast title
   $('#forecastTitle').text('5-day Weather Forecast: ')
   //loop through forecast data and add to html
-  for (var i = 0; i < 5; i++) {
+  for (var i = 1; i < 6; i++) {
     var date = new Date(forecastData[i].dt * 1000);
     var month = date.getMonth() + 1;
     var day = date.getDate(); 
