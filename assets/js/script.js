@@ -70,8 +70,10 @@ var displayCurrentWeather = function(city, currentData) {
 
   getUvIndex(currentData.uvi);
 
+  currentInputEL.classList = "border rounded pl-1"
+  
   currentInputEL.innerHTML = `
-    <h3>${city} (${getDate})</h3>
+    <h3>${city} (${getDate}) <img src="http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="icon representing ${currentData.weather[0].main}"></h3>
     <p>Temp: ${currentData.temp}° F</p>
     <p>Wind: ${currentData.wind_speed} MPH</p>
     <p>Humidity: ${currentData.humidity}%</p>
