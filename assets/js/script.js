@@ -1,8 +1,14 @@
-var cityButtonsEl = document.querySelector("#search-btn");
 var cityInputEl = document.querySelector("#city-name");
-var formInputEl = document.querySelector("#search-box");
 var currentInputEL = document.querySelector("#current");
-var forecastInputEl = document.querySelector("#forecast")
+var searchHistory = [];
+
+var loadHistory = function() {
+  searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+  if (!searchHistory) {
+    return searchHistory = [];
+  }
+
+}
 
 var formSubmitHandler = function(event) {
   event.preventDefault();
@@ -10,13 +16,14 @@ var formSubmitHandler = function(event) {
 
   if (city) {
     convertCity(city);
+
   } else {
     alert("Please enter a City");
   }
   cityInputEl.value = '';
 };
 
-formInputEl.addEventListener("submit", formSubmitHandler);
+$('#search-btn').on("click", formSubmitHandler);
 
 var convertCity = function(city) {
   var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=9c2bde727734176187ec259dc26ddab0`;
@@ -112,3 +119,4 @@ var displayForecast = function(forecastData) {
    }).appendTo('#forecast')
   };
 };
+
