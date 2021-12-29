@@ -1,5 +1,3 @@
-var cityInputEl = document.querySelector("#city-name");
-var currentInputEL = document.querySelector("#current");
 var searchHistory = [];
 
 var loadHistory = function() {
@@ -84,16 +82,19 @@ var displayCurrentWeather = function(city, currentData) {
 
   getUvIndex(currentData.uvi);
 
-  currentInputEL.classList = "border rounded pl-1"
+  $('#current').addClass('border rounded pl-1');
   
-  currentInputEL.innerHTML = `
-    <h3>${city} (${month}/${day}/${year}) <img src="http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="icon representing ${currentData.weather[0].main}" class="weatherIcon"></h3>
-    <p>Temp: ${currentData.temp}° F</p>
-    <p>Wind: ${currentData.wind_speed} MPH</p>
-    <p>Humidity: ${currentData.humidity}%</p>
-    <p>UV Index: <button class="btn ${uvIndex}">${currentData.uvi}</button></p>
-  `;
-}
+  $('#current')
+    .html(
+      `
+      <h3>${city} (${month}/${day}/${year}) <img src="http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="icon representing ${currentData.weather[0].main}" class="weatherIcon"></h3>
+      <p>Temp: ${currentData.temp}° F</p>
+      <p>Wind: ${currentData.wind_speed} MPH</p>
+      <p>Humidity: ${currentData.humidity}%</p>
+      <p>UV Index: <button class="btn ${uvIndex}">${currentData.uvi}</button></p>
+      `
+    );
+};
 
 var displayForecast = function(forecastData) {
   //clear current html
@@ -112,7 +113,7 @@ var displayForecast = function(forecastData) {
       'class': 'card mt-1',
       'html': `
       <div class="card-body">
-        <h5 class="card-title">(${month}/${day}/${year})</h5>
+        <h5 class="card-title">${month}/${day}/${year}</h5>
         <img src="http://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}@2x.png" alt="icon representing ${forecastData[i].weather[0].main}" class="weatherIconSmall">
         <p class="card-text">Temp: ${forecastData[i].temp.day}° F </p>
         <p class="card-text">Wind: ${forecastData[i].wind_speed} MPH</p>
