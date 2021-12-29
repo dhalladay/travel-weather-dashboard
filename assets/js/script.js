@@ -13,6 +13,7 @@ var formSubmitHandler = function(event) {
   } else {
     alert("Please enter a City");
   }
+  cityInputEl.value = '';
 };
 
 formInputEl.addEventListener("submit", formSubmitHandler);
@@ -85,6 +86,12 @@ var displayCurrentWeather = function(city, currentData) {
 }
 
 var displayForecast = function(forecastData) {
+  //clear current html
+  $('#forecastTitle').text('');
+  $('#forecast').html('');
+  //add 5-day forecast title
+  $('#forecastTitle').text('5-day Weather Forecast: ')
+  //loop through forecast data and add to html
   for (var i = 0; i < 5; i++) {
     var date = new Date(forecastData[i].dt * 1000);
     var month = date.getMonth() + 1;
@@ -92,7 +99,7 @@ var displayForecast = function(forecastData) {
     var year = date.getFullYear();
     $('<div />', {
       'id': i,
-      'class': 'card col-md-2 mt-1',
+      'class': 'card mt-1',
       'html': `
       <div class="card-body">
         <h5 class="card-title">(${month}/${day}/${year})</h5>
