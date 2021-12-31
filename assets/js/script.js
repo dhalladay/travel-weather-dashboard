@@ -74,7 +74,7 @@ var saveCity = function(city) {
 
 //use openweathermap geo code search to convert city to lat and longtitude 
 var convertCity = function(city) {
-  var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=9c2bde727734176187ec259dc26ddab0`;
+  var apiURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=9c2bde727734176187ec259dc26ddab0`;
   fetch(apiURL)
   .then(function(response) {
     if(response.ok) {
