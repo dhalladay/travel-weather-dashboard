@@ -23,6 +23,11 @@ var displayHistorySearches = function(data) {
   };
 };
 
+$('#history-search-list').on("click", "button", function() {
+  var previousCity = $(this).text();
+  convertCity(previousCity);
+});
+
 var formSubmitHandler = function(event) {
   event.preventDefault();
   var city = $('#city-name')
@@ -84,7 +89,6 @@ var oneCall = function(city, locArr) {
         currentData = data.current;
         forecastData = data.daily;
         displayCurrentWeather(city, currentData);
-        displayForecast(forecastData);
       })
     } else {
       alert("Unable to find weather data, please try again.");
@@ -108,42 +112,43 @@ var displayCurrentWeather = function(city, currentData) {
       return uvIndex = "btn-danger";
     }
   };
-
+  
   getUvIndex(currentData.uvi);
-
+  
   $('#current').addClass('border rounded pl-1');
   
   $('#current')
-    .html(
-      `
-      <h3>${city} (${month}/${day}/${year}) <img src="http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="icon representing ${currentData.weather[0].main}" class="weatherIcon"></h3>
-      <p>Temp: ${currentData.temp}° F</p>
-      <p>Wind: ${currentData.wind_speed} MPH</p>
-      <p>Humidity: ${currentData.humidity}%</p>
-      <p>UV Index: <button class="btn ${uvIndex}">${currentData.uvi}</button></p>
-      `
+  .html(
+    `
+    <h3>${city} (${month}/${day}/${year}) <img src="http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="icon representing ${currentData.weather[0].main}" class="weatherIcon"></h3>
+    <p>Temp: ${currentData.temp}° F</p>
+    <p>Wind: ${currentData.wind_speed} MPH</p>
+    <p>Humidity: ${currentData.humidity}%</p>
+    <p>UV Index: <button class="btn ${uvIndex}">${currentData.uvi}</button></p>
+    `
     );
-};
-
-var displayForecast = function(forecastData) {
-  //clear current html
-  $('#forecastTitle').text('');
-  $('#forecast').html('');
-  //add 5-day forecast title
-  $('#forecastTitle').text('5-day Weather Forecast: ')
-  //loop through forecast data and add to html
-  for (var i = 1; i < 6; i++) {
-    var date = new Date(forecastData[i].dt * 1000);
-    var month = date.getMonth() + 1;
-    var day = date.getDate(); 
-    var year = date.getFullYear();
-    $('<div />', {
-      'id': i,
+    displayForecast(forecastData);
+  };
+  
+  var displayForecast = function(forecastData) {
+    //clear current html
+    $('#forecastTitle').text('');
+    $('#forecast').html('');
+    //add 5-day forecast title
+    $('#forecastTitle').text('5-day Weather Forecast: ')
+    //loop through forecast data and add to html
+    for (var i = 1; i < 6; i++) {
+      var date = new Date(forecastData[i].dt * 1000);
+      var month = date.getMonth() + 1;
+      var day = date.getDate(); 
+      var year = date.getFullYear();
+      $('<div />', {
+        'id': i,
       'class': 'card mt-1',
       'html': `
       <div class="card-body">
         <h5 class="card-title">${month}/${day}/${year}</h5>
-        <img src="http://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}@2x.png" alt="icon representing ${forecastData[i].weather[0].main}" class="weatherIconSmall">
+        <img src="http://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}@2x.png" alt="icon representing ${forecastData[i].weather[0].main}" class="weatherIcon">
         <p class="card-text">Temp: ${forecastData[i].temp.day}° F </p>
         <p class="card-text">Wind: ${forecastData[i].wind_speed} MPH</p>
         <p class="card-text">Humidity: ${forecastData[i].humidity}</p>

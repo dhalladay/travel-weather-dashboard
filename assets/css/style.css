@@ -52,7 +52,7 @@ header h1{
 }
 
 .card {
-  background-color: navy;
+  background-color: blue;
   color: azure;
   text-align: left;
 }
@@ -63,11 +63,6 @@ header h1{
 
 .card img {
   margin-bottom: 0.5em;
-}
-
-.weatherIconSmall {
-  width: 25px;
-  height: 25px;
 }
 
 @media screen and (max-width: 640px) {
