@@ -143,7 +143,7 @@ var displayCurrentWeather = function(city, currentData) {
     <p>Temp: ${currentData.temp}° F</p>
     <p>Wind: ${currentData.wind_speed} MPH</p>
     <p>Humidity: ${currentData.humidity}%</p>
-    <p>UV Index: <button class="btn ${uvIndex}">${currentData.uvi}</button></p>
+    <p>UV Index: <button id="uvi" class="btn ${uvIndex}">${currentData.uvi}</button></p>
     `
     );
     //send forecast data to displayForecast function

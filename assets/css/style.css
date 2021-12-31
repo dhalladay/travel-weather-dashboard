@@ -51,6 +51,10 @@ header h1{
   height: 50px;
 }
 
+#uvi {
+  min-width: 30px;
+}
+
 .card {
   background-color: blue;
   color: azure;
