@@ -1,5 +1,7 @@
+//declare variables
 var searchHistory = [];
 
+//update searchHistory if array exists in localStorage
 var createSearchArr = function() {
   searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
   if (!searchHistory) {
@@ -12,6 +14,7 @@ var createSearchArr = function() {
   displayHistorySearches(searchHistory);
 };
 
+//display historical searches
 var displayHistorySearches = function(data) {
   //clear search history
   $('#history-search-list').html('');
@@ -25,11 +28,13 @@ var displayHistorySearches = function(data) {
   };
 };
 
+//add event listener to search historical cities
 $('#history-search-list').on("click", "button", function() {
   var previousCity = $(this).text();
   convertCity(previousCity);
 });
 
+//prepare user input to for fetch request
 var formSubmitHandler = function(event) {
   event.preventDefault();
   var city = $('#city-name')
@@ -42,14 +47,18 @@ var formSubmitHandler = function(event) {
   } else {
     alert("Please enter a City");
   }
-  
+  //clear user input
   $('#city-name').val('');
 };
 
+//add event listener for search form
 $('#search-btn').on("click", formSubmitHandler);
 
+//save successful city searches
 var saveCity = function(city) {
+  //only add to searchHistory if it doesn't already exist.
   if (searchHistory.indexOf(city) === -1) {
+    //if the array is more than 9, remove first element in array and add new city to the end of the array
     if (searchHistory.length >= 9) {
       searchHistory.pop();
       searchHistory.unshift(city);
@@ -59,9 +68,11 @@ var saveCity = function(city) {
     }
   }
   localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+  //display city in history element
   displayHistorySearches(searchHistory);
 };
 
+//use openweathermap geo code search to convert city to lat and longtitude 
 var convertCity = function(city) {
   var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=9c2bde727734176187ec259dc26ddab0`;
   fetch(apiURL)
@@ -81,6 +92,7 @@ var convertCity = function(city) {
   });
 };
 
+//insert lat and longtitute into URL for api fetch request
 var oneCall = function(city, locArr) {
   var lat = locArr[0];
   var lon = locArr[1];
@@ -91,6 +103,7 @@ var oneCall = function(city, locArr) {
       response.json().then(function(data) {
         currentData = data.current;
         forecastData = data.daily;
+        //send successful data to be displayed
         displayCurrentWeather(city, currentData);
       })
     } else {
@@ -100,12 +113,15 @@ var oneCall = function(city, locArr) {
   .catch("Unable to connect to Open Weather Map. Please try again later.")
 };
 
+//display current weather conditions
 var displayCurrentWeather = function(city, currentData) {
+  //create a new date object (multiply by 1000 to get in miliseconds)
   var date = new Date(currentData.dt * 1000);
   var month = date.getMonth() + 1;
   var day = date.getDate(); 
   var year = date.getFullYear();
   var uvIndex = '';
+  //add background color class based on uvi value 
   var getUvIndex = function(uvi) {
     if (uvi < 3) {
       return uvIndex = 'btn-success';
@@ -130,9 +146,11 @@ var displayCurrentWeather = function(city, currentData) {
     <p>UV Index: <button class="btn ${uvIndex}">${currentData.uvi}</button></p>
     `
     );
+    //send forecast data to displayForecast function
     displayForecast(forecastData);
   };
   
+  //display 5 day forecast
   var displayForecast = function(forecastData) {
     //clear current html
     $('#forecastTitle').text('');
@@ -161,4 +179,5 @@ var displayCurrentWeather = function(city, currentData) {
     };
   };
   
+  //load items from localStorage
   createSearchArr();
