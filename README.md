@@ -1,12 +1,13 @@
 # Weather Dashboard
   
+Know what the weather will be before you go!  
   
 ![Screenshot of the Weather Dashboard](./assets/images/weather-dashboard-screenshot.png)
   
 
 ## Description
 
-Bad weather can impact any plans. This project allows the user to know in adadvance what kind of weather to expect in any of 200,000 cities across the world thanks to the openweathermap api so that they can make or change their plans accordingly.
+Bad weather can impact any plans. This project allows the user to know in advance what kind of weather to expect in any of 200,000 cities across the world thanks to the openweathermap api so that they can make or change their plans accordingly.
 
 ## Made with:
 
