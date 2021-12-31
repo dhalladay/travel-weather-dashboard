@@ -5,7 +5,7 @@ var loadHistory = function() {
   if (!searchHistory) {
     return searchHistory = [];
   }
-
+  return searchHistory;
 };
 
 var formSubmitHandler = function(event) {
@@ -26,6 +26,19 @@ var formSubmitHandler = function(event) {
 
 $('#search-btn').on("click", formSubmitHandler);
 
+var saveCity = function(city) {
+  if (searchHistory.indexOf(city) === -1) {
+    if (searchHistory.length >= 9) {
+      searchHistory.pop();
+      searchHistory.unshift(city);
+    }
+    else {
+      searchHistory.unshift(city);
+    }
+  }
+  console.log(searchHistory)
+};
+
 var convertCity = function(city) {
   var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=9c2bde727734176187ec259dc26ddab0`;
   fetch(apiURL)
@@ -34,6 +47,7 @@ var convertCity = function(city) {
       response.json().then(function(data) {
         var locArr = [data[0].lat, data[0].lon];
         oneCall(city, locArr);
+        saveCity(city);
       });
     } else {
       alert("Error: City not found. Try adding a comma and the state or country code");
@@ -62,6 +76,10 @@ var oneCall = function(city, locArr) {
     }
   })
   .catch("Unable to connect to Open Weather Map. Please try again later.")
+};
+
+var displayHistorySearches = function(data) {
+  data.forEach(searchItem => console.log(searchItem))
 };
 
 var displayCurrentWeather = function(city, currentData) {
