@@ -3,12 +3,14 @@ var searchHistory = [];
 var createSearchArr = function() {
   searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
   if (!searchHistory) {
-    return searchHistory = [];
+    // return searchHistory = [];
+    searchHistory = [];
+  } else {
+    // return searchHistory;
+    searchHistory
   }
-  return searchHistory;
+  displayHistorySearches(searchHistory);
 };
-
-createSearchArr();
 
 var displayHistorySearches = function(data) {
   //clear search history
@@ -19,7 +21,7 @@ var displayHistorySearches = function(data) {
       'html': `
       <button class="history btn btn-secondary btn-block mt-1">${data[i]}</button>
       `,
-   }).appendTo('#history-search-list')
+    }).appendTo('#history-search-list')
   };
 };
 
@@ -31,16 +33,16 @@ $('#history-search-list').on("click", "button", function() {
 var formSubmitHandler = function(event) {
   event.preventDefault();
   var city = $('#city-name')
-    .val()
-    .trim()
-
+  .val()
+  .trim()
+  
   if (city) {
     convertCity(city);
-
+    
   } else {
     alert("Please enter a City");
   }
-
+  
   $('#city-name').val('');
 };
 
@@ -56,6 +58,7 @@ var saveCity = function(city) {
       searchHistory.unshift(city);
     }
   }
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
   displayHistorySearches(searchHistory);
 };
 
@@ -144,17 +147,18 @@ var displayCurrentWeather = function(city, currentData) {
       var year = date.getFullYear();
       $('<div />', {
         'id': i,
-      'class': 'card mt-1',
-      'html': `
-      <div class="card-body">
+        'class': 'card mt-1',
+        'html': `
+        <div class="card-body">
         <h5 class="card-title">${month}/${day}/${year}</h5>
         <img src="http://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}@2x.png" alt="icon representing ${forecastData[i].weather[0].main}" class="weatherIcon">
         <p class="card-text">Temp: ${forecastData[i].temp.day}° F </p>
         <p class="card-text">Wind: ${forecastData[i].wind_speed} MPH</p>
         <p class="card-text">Humidity: ${forecastData[i].humidity}</p>
-      </div>
-      `,
-   }).appendTo('#forecast')
+        </div>
+        `,
+      }).appendTo('#forecast')
+    };
   };
-};
-
+  
+  createSearchArr();
