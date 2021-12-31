@@ -1,11 +1,26 @@
 var searchHistory = [];
 
-var loadHistory = function() {
+var createSearchArr = function() {
   searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
   if (!searchHistory) {
     return searchHistory = [];
   }
   return searchHistory;
+};
+
+createSearchArr();
+
+var displayHistorySearches = function(data) {
+  //clear search history
+  $('#history-search-list').html('');
+  for (var i = 0; i < data.length; i++) {
+    $('<li />', {
+      'id': data[i],
+      'html': `
+      <button class="history btn btn-secondary btn-block mt-1">${data[i]}</button>
+      `,
+   }).appendTo('#history-search-list')
+  };
 };
 
 var formSubmitHandler = function(event) {
@@ -36,7 +51,7 @@ var saveCity = function(city) {
       searchHistory.unshift(city);
     }
   }
-  console.log(searchHistory)
+  displayHistorySearches(searchHistory);
 };
 
 var convertCity = function(city) {
@@ -76,10 +91,6 @@ var oneCall = function(city, locArr) {
     }
   })
   .catch("Unable to connect to Open Weather Map. Please try again later.")
-};
-
-var displayHistorySearches = function(data) {
-  data.forEach(searchItem => console.log(searchItem))
 };
 
 var displayCurrentWeather = function(city, currentData) {
