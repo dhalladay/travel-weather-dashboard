@@ -139,7 +139,7 @@ var displayCurrentWeather = function(city, currentData) {
   $('#current')
   .html(
     `
-    <h3>${city} (${month}/${day}/${year}) <img src="http://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="icon representing ${currentData.weather[0].main}" class="weatherIcon"></h3>
+    <h3>${city} (${month}/${day}/${year}) <img src="https://openweathermap.org/img/wn/${currentData.weather[0].icon}@2x.png" alt="icon representing ${currentData.weather[0].main}" class="weatherIcon"></h3>
     <p>Temp: ${currentData.temp}° F</p>
     <p>Wind: ${currentData.wind_speed} MPH</p>
     <p>Humidity: ${currentData.humidity}%</p>
@@ -169,7 +169,7 @@ var displayCurrentWeather = function(city, currentData) {
         'html': `
         <div class="card-body">
         <h5 class="card-title">${month}/${day}/${year}</h5>
-        <img src="http://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}@2x.png" alt="icon representing ${forecastData[i].weather[0].main}" class="weatherIcon">
+        <img src="https://openweathermap.org/img/wn/${forecastData[i].weather[0].icon}@2x.png" alt="icon representing ${forecastData[i].weather[0].main}" class="weatherIcon">
         <p class="card-text">Temp: ${forecastData[i].temp.day}° F </p>
         <p class="card-text">Wind: ${forecastData[i].wind_speed} MPH</p>
         <p class="card-text">Humidity: ${forecastData[i].humidity}</p>
